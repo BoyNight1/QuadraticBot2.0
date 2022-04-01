@@ -17,18 +17,6 @@ module.exports = async (interaction) => {
             `${interaction.user.tag} (${interaction.user.id}) is entering the giveaway ${giveaway.item} (${giveaway.uuid}). The message id is ${interaction.message.id}`
         )
 
-        if (
-            giveaway.requirements &&
-            !interaction.member.roles.cache.hasAll(
-                ...giveaway.requirements.split(",")
-            )
-        )
-            return await interaction.reply({
-                content:
-                    "You do not have the required roles to enter this giveaway.",
-                ephemeral: true,
-            })
-
         if (!interaction.client.application.owner)
             await interaction.client.application.fetch()
 
@@ -41,6 +29,18 @@ module.exports = async (interaction) => {
                 ephemeral: true,
             })
 
+        if (
+            giveaway.requirements &&
+            !interaction.member.roles.cache.hasAll(
+                ...giveaway.requirements.split(",")
+            )
+        )
+            return await interaction.reply({
+                content:
+                    "You do not have the required roles to enter this giveaway.",
+                ephemeral: true,
+            })
+            
         const result = await db.Entrants.findOrCreate({
             where: {
                 [Op.and]: [
