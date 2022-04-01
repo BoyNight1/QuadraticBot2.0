@@ -1,5 +1,9 @@
 # Changelog
 
+## 04/01/2022
+
+- Fixed bug with entering own giveaway
+
 ## 23/03/2022
 
 -   Changed ping command to include "ms".
