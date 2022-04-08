@@ -4,6 +4,7 @@ module.exports = {
     name: "ready",
     once: true,
     execute: async (client) => {
+        client.user.setActivity("for /giveaway", { type: "WATCHING" })
         console.log(`Ready! Logged in as ${client.user.tag}`)
         try {
             await db.Sequelize.authenticate()
